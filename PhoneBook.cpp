@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <map>
 #include <fstream>
@@ -37,23 +37,7 @@ void ShowAll(map<string, Person> phoneBook) {
 	}
 }
 
-string FindSomebody(map<string, Person> phoneBook) {
 
-	string key;
-	cout << "Who do you wont to find?" << endl;
-	cin >> key;
-	auto iterator = phoneBook.find(key);
-	if (iterator != phoneBook.end()) {
-		cout << iterator->second.lastName << ""
-			<< iterator->second.name << " "
-			<< iterator->second.phoneNumber << " "
-			<< iterator->second.group << endl;
-	}
-	else {
-		cout << "No one found (" << endl;
-	}
-	return key;
-}
 
 void FindSomebody(map<string, Person> phoneBook, string key) {
 
@@ -70,48 +54,29 @@ void FindSomebody(map<string, Person> phoneBook, string key) {
 }
 
 
-void ChangeSomebody(map<string, Person> phoneBook) {
-	string key;
-	key = FindSomebody(phoneBook);
-	auto iterator = phoneBook.find(key);
-	cout << "What do you want to change?" << endl;
-	cout << "1 - lastname" << endl;
-	cout << "2 - name" << endl;
-	cout << "3 - phone number" << endl;
-	cout << "4 - group" << endl;
+string FindSomebody(map<string, Person> phoneBook) {
+    string key;
+    cout << "Who do you wont to find?" << endl;
+    cin >> key;
+    FindSomebody(phoneBook, key);
+    return key;
+}
 
-
-	string temp;
-	bool tempBool;
-	int change;
-	cin >> change;
-	switch (change) {
-	case 1:
-		cout << "Enter the new value" << endl;
-		cin >> temp;
-		iterator->second.lastName = temp;
-		break;
-
-	case 2:
-		cout << "Enter the new value" << endl;
-		cin >> temp;
-		iterator->second.name = temp;
-		break;
-	case 3:
-		cout << "Enter the new value" << endl;
-		cin >> temp;
-		iterator->second.phoneNumber = temp;
-		break;
-
-	case 4:
-		cout << "Enter the new value" << endl;
-		cin >> temp;
-		iterator->second.group = temp;
-		break;
-
-	}
-
-	FindSomebody(phoneBook, key);
+void ChangeSomebody(map<string, Person> phoneBook,  string key, int change, string temp) {
+    auto iterator = phoneBook.find(key);
+    if (change == 1) {
+        iterator->second.lastName = temp;
+    }
+    if (change == 2) {
+        iterator->second.name = temp;
+    }
+    if (change == 3) {
+        iterator->second.phoneNumber = temp;
+    }
+    if (change == 4) {
+        iterator->second.group = temp;
+    }
+    FindSomebody(phoneBook, key);
 }
 
 
@@ -188,12 +153,16 @@ void ImportFromFile(map<string, Person>& phoneBook) {
 	file.close();
 }
 
-//  //И кто мне это запретит?
+
 
 int main()
 {
 	map<string, Person> phoneBook;
 	int menu;
+    string temp;
+    int change;
+    string key;
+
 	cout << "\n\n\t+++PhoneBook+++\n\n";
 	do {
 		cout << "\n\n\nTo add somebody press [1]" << endl;
@@ -227,8 +196,34 @@ int main()
 
 		case 4:
 		{
-			ChangeSomebody(phoneBook);
-			break;
+            key = FindSomebody(phoneBook);
+            cout << "What do you want to change?" << endl;
+            cout << "1 - lastname" << endl;
+            cout << "2 - name" << endl;
+            cout << "3 - phone number" << endl;
+            cout << "4 - group" << endl;
+            cin >> change;
+            cout << "Enter the new value" << endl;
+            switch (change) {
+                case 1:
+                    cin >> temp;
+                    ChangeSomebody(phoneBook, key, change, temp);
+                    break;
+                case 2:
+                    cin >> temp;
+                    ChangeSomebody(phoneBook, key, change, temp);
+                    break;
+                case 3:
+                    cin >> temp;
+                    ChangeSomebody(phoneBook, key, change, temp);
+                    break;
+                case 4:
+                    cin >> temp;
+                    ChangeSomebody(phoneBook, key, change, temp);
+                    break;
+            }
+            break;
+
 		}
 		case 5:
 		{
