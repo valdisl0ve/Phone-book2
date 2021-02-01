@@ -10,9 +10,9 @@ int main()
 {
 	map<string, Person> phoneBook;
 	int menu;
-    string temp;
-    int change;
-    string key;
+	string temp;
+	int change;
+	string key;
 
 	cout << "\n\n\t+++PhoneBook+++\n\n";
 	do {
@@ -47,25 +47,25 @@ int main()
 
 		case 4:
 		{
-            cout << "Who do you want to find?" << endl;
-            cin >> key;
-            FindSomebody(phoneBook, key);
-            cout << "What do you want to change?" << endl;
-            cout << "1 - lastname" << endl;
-            cout << "2 - name" << endl;
-            cout << "3 - phone number" << endl;
-            cout << "4 - group" << endl;
-            cin >> change;
-            cout << "Enter the new value" << endl;
-            cin >> temp;
-            ChangeSomebody(phoneBook, key, change, temp);
-            break;
+			cout << "\nWho do you want to find?" << endl;
+			cin >> key;
+			FindSomebody(phoneBook, key);
+			cout << "\nWhat do you want to change?" << endl << endl;
+			cout << "1 - lastname" << endl;
+			cout << "2 - name" << endl;
+			cout << "3 - phone number" << endl;
+			cout << "4 - group" << endl;
+			cin >> change;
+			cout << "\nEnter the new value" << endl;
+			cin >> temp;
+			ChangeSomebody(phoneBook, key, change, temp);
+			break;
 
 		}
 		case 5:
 		{
 			string key;
-			cout << "Enter the last name - "; cin >> key;
+			cout << "\nEnter the last name - "; cin >> key;
 			DeleteSomebody(phoneBook, key);
 
 			cout << "RESULT" << endl << endl;
